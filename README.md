@@ -49,4 +49,5 @@ If it finds the script is already playing music it kills the music. If the radio
 - I'd highly recommend linking this script to a keybinding, using a tool such as skhd: https://github.com/koekeishiya/skhd
 - The menu highlight color can be customized by changing the hex value in the `choose` command preceded by the -b argument (default is set to 'ff79c6').
 - The menu width can be changed my modifying the value after the -w tag of the `choose` command.
+- `terminal-notifier` may need to be given permission to use notifications
 
