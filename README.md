@@ -38,7 +38,11 @@ Now the script is ready to use!
 
 ## Usage
 
-The script toggles the radio on and off depending on it's current state. The script first checks to see if an instance of the radio is already playing. If it finds the script is already playing music it kills the music. If the radio is not already playing it will launch the list of stations you can choose from.
+The script toggles the radio on and off depending on it's current state. 
+
+The script first checks to see if an instance of the radio is already playing. 
+
+If it finds the script is already playing music it kills the music. If the radio is not already playing it will launch the list of stations you can choose from.
 
 ## Extra Tips 📝
 
