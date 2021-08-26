@@ -12,7 +12,7 @@ A rofi-like menu for playing lofi radio stations on MacOS.
 
 Download the dependencies with Homebrew.
 
-If you don't have Home brew installed, it can quickly be set up by running the following command in your terminal:
+If you don't have Homebrew installed, it can quickly be set up by running the following command in your terminal:
 
 ```
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
