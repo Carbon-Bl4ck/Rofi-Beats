@@ -9,7 +9,7 @@ menu(){
 	printf "2. Chillhop\n"
 	printf "3. Box Lofi\n"
 	printf "4. The Bootleg Boy\n"
-	printf "5. Chill EDM\n"
+	printf "5. Radio Spinner\n"
 	printf "6. SmoothChill"
 }
 
@@ -39,7 +39,7 @@ main() {
 			;;
 		5)
 			notification ;
-				mpv "https://stream.zeno.fm/2d3yxh6fd2zuv"
+				mpv "https://live.radiospinner.com/lofi-hip-hop-64"
 			break
 			;;
 		6)
