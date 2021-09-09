@@ -44,12 +44,12 @@ To install `notify-send` and `rofi` enter the following:
 
 For Ubuntu:
 ```
-$ sudo apt install rofi notify-osd
+$ sudo apt install rofi notify-osd mpv
 ```
 For Arch Linux:
 
 ```
-sudo pacman -S rofi notify-osd
+sudo pacman -S rofi notify-osd mpv
 ```
 
 Per the MacOS install clone this repository:
