@@ -23,7 +23,7 @@ Once homebrew is installed you can add the relevant packages:
 $ brew install choose-gui mpv terminal-notifier
 ```
 
-Now clone this repository and give the script executable permissions
+Now clone this repository and give the script executable permissions:
 
 ```
 $ git clone https://github.com/Carbon-Bl4ck/Rofi-Beats
@@ -36,6 +36,40 @@ Now the script is ready to use!
 ./rofi-beats
 ```
 
+## Linux 🐧
+
+The linux version of this script is pretty much identical, replacing `terminal-notifier` with `notify-send`, and `choose-gui` with the aponymous `rofi`
+
+To install `notify-send` and `rofi` enter the following:
+
+For Ubuntu:
+```
+$ sudo apt install rofi notify-osd mpv
+```
+For Arch Linux:
+
+```
+sudo pacman -S rofi notify-osd mpv
+```
+
+Per the MacOS install clone this repository:
+
+```
+$ git clone https://github.com/Carbon-Bl4ck/Rofi-Beats
+$ cd Rofi-Beats
+```
+Now remove the `rofi-beats` script and rename `rofi-beats-linux`:
+
+```
+$ rm rofi-beats
+$ mv rofi-beats-linux rofi-beats
+$ chmod +x rofi-beats
+```
+
+Now test out the script:
+```
+$ ./rofi-beats
+```
 ## Usage
 
 The script toggles the radio on and off depending on it's current state. 
