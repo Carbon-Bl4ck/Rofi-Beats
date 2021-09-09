@@ -40,16 +40,16 @@ Now the script is ready to use!
 
 The linux version of this script is pretty much identical, replacing `terminal-notifier` with `notify-send`, and `choose-gui` with aponymous `rofi`
 
-`notify-send` should already be preinstalled on most systems, however, you may need to install rofi:
+To install `notify-send` and `rofi` enter the following:
 
-For Debian/Ubuntu:
+For Ubuntu:
 ```
-$ sudo apt install rofi
+$ sudo apt install rofi notify-osd
 ```
 For Arch Linux:
 
 ```
-sudo pacman -S rofi
+sudo pacman -S rofi notify-osd
 ```
 
 Per the MacOS install clone this repository:
