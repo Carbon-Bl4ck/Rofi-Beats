@@ -38,7 +38,7 @@ Now the script is ready to use!
 
 ## Linux 🐧
 
-The linux version of this script is pretty much identical, replacing `terminal-notifier` with `notify-send`, and `choose-gui` with aponymous `rofi`
+The linux version of this script is pretty much identical, replacing `terminal-notifier` with `notify-send`, and `choose-gui` with the aponymous `rofi`
 
 To install `notify-send` and `rofi` enter the following:
 
