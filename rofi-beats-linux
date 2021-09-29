@@ -52,7 +52,8 @@ main() {
 			;;
 	esac
     # run mpv with args and selected url
-    mpv $ARGS $URL
+    # added title arg to make sure the pkill command kills only this instance of mpv
+    mpv $ARGS --title="radio-mpv" $URL
 }
 
-pkill -f mpv || main
+pkill -f radio-mpv || main
