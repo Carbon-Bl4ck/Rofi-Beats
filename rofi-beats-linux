@@ -1,7 +1,10 @@
 #!/bin/sh
 
+# add more args here according to preference
+ARGS="--volume=60"
+
 notification(){
-	notify-send "Now Playing: Lofi Radio ☕️🎶"
+	notify-send "Now Playing:" "Lofi Radio ☕️🎶"
 }
 
 menu(){
@@ -19,35 +22,37 @@ main() {
 	case $choice in
 		1)
 			notification ;
-				mpv "https://play.streamafrica.net/lofiradio"
+            URL="https://play.streamafrica.net/lofiradio"
 			break
 			;;
 		2)
 			notification ;
-				mpv "http://stream.zeno.fm/fyn8eh3h5f8uv"
+            URL="http://stream.zeno.fm/fyn8eh3h5f8uv"
 			break
 			;;
 		3)
 			notification ;
-				mpv "http://stream.zeno.fm/f3wvbbqmdg8uv"
+            URL="http://stream.zeno.fm/f3wvbbqmdg8uv"
 			break
 			;;
 		4)
 			notification ;
-				mpv "http://stream.zeno.fm/0r0xa792kwzuv"
+            URL="http://stream.zeno.fm/0r0xa792kwzuv"
 			break
 			;;
 		5)
 			notification ;
-				mpv "https://live.radiospinner.com/lofi-hip-hop-64"
+            URL="https://live.radiospinner.com/lofi-hip-hop-64"
 			break
 			;;
 		6)
 			notification ;
-				mpv "https://media-ssl.musicradio.com/SmoothChill"
+            URL="https://media-ssl.musicradio.com/SmoothChill"
 			break
 			;;
 	esac
+    # run mpv with args and selected url
+    mpv $ARGS $URL
 }
 
-pkill -f http || main
+pkill -f mpv || main
