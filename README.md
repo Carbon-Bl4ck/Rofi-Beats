@@ -30,7 +30,7 @@ $ git clone https://github.com/Carbon-Bl4ck/Rofi-Beats
 $ cd Rofi-Beats
 $ chmod +x rofi-beats
 ```
-Now the script is ready to use! 
+Now the script is ready to use!
 
 ```
 ./rofi-beats
@@ -72,11 +72,15 @@ $ ./rofi-beats
 ```
 ## Usage
 
-The script toggles the radio on and off depending on it's current state. 
+The script toggles the radio on and off depending on it's current state.
 
-The script first checks to see if an instance of the radio is already playing. 
+The script first checks to see if an instance of the radio is already playing.
 
 If it finds the script is already playing music it kills the music. If the radio is not already playing it will launch the list of stations you can choose from.
+
+### `mpv` arguments
+
+You can add options in the `ARGS` variable in the script to specify those options for running mpv. The default of `--volume=60` is already added.
 
 ## Extra Tips 📝
 
@@ -84,4 +88,3 @@ If it finds the script is already playing music it kills the music. If the radio
 - The menu highlight color can be customized by changing the hex value in the `choose` command preceded by the -b argument (default is set to 'ff79c6').
 - The menu width can be changed my modifying the value after the -w tag of the `choose` command.
 - `terminal-notifier` may need to be given permission to use notifications
-
