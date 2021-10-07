@@ -4,7 +4,13 @@
 ARGS="--volume=60"
 
 notification(){
-	notify-send "Now Playing:" "Lofi Radio ☕️🎶"
+# change the icon to whatever you want. Make sure your notification server 
+# supports it and already configured.
+
+# Now it will receive argument so the user can rename the radio title
+# to whatever they want
+
+	notify-send "Playing now: " "$@" --icon=media-tape
 }
 
 menu(){
@@ -21,32 +27,32 @@ main() {
 
 	case $choice in
 		1)
-			notification ;
+			notification "Lofi Girl ☕️🎶";
             URL="https://play.streamafrica.net/lofiradio"
 			break
 			;;
 		2)
-			notification ;
+			notification "Chillhop ☕️🎶";
             URL="http://stream.zeno.fm/fyn8eh3h5f8uv"
 			break
 			;;
 		3)
-			notification ;
+			notification "Box Lofi ☕️🎶";
             URL="http://stream.zeno.fm/f3wvbbqmdg8uv"
 			break
 			;;
 		4)
-			notification ;
+			notification "The Bootleg Boy ☕️🎶";
             URL="http://stream.zeno.fm/0r0xa792kwzuv"
 			break
 			;;
 		5)
-			notification ;
+			notification "Radio Spinner ☕️🎶";
             URL="https://live.radiospinner.com/lofi-hip-hop-64"
 			break
 			;;
 		6)
-			notification ;
+			notification "SmoothChill ☕️🎶";
             URL="https://media-ssl.musicradio.com/SmoothChill"
 			break
 			;;
