@@ -12,7 +12,7 @@ playstream(){
 	# the sh wrapper is necessary to be able to pass paths/args with spaces
 	# exec is necessary to get rid of the sh wrapper - not so sure about this
 	# the title arg is necessary to kill only this instance of mpv
-	sh -c "exec mpv --title='radio-mpv' --no-video $ARGS $*"
+	sh -c "exec mpv --title=radio-mpv --no-video $ARGS $*"
 }
 
 declare -A streams
@@ -37,4 +37,4 @@ main() {
 	playstream "${streams[$choice]}"
 }
 
-pkill -f radio-mpv || main
+pkill -f '^mpv --title=radio-mpv' || main
