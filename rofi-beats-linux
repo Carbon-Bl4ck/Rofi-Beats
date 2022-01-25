@@ -1,65 +1,42 @@
-#!/bin/sh
+#!/bin/bash
 
 # add more args here according to preference
 ARGS="--volume=60"
 
 notification(){
-# change the icon to whatever you want. Make sure your notification server 
-# supports it and already configured.
-
-# Now it will receive argument so the user can rename the radio title
-# to whatever they want
-
-	notify-send "Playing now: " "$@" --icon=media-tape
+	# change the icon to whatever you want.
+	# make sure your notification server supports it and is already configured.
+	# '&' protects script from a dead notification server
+	notify-send --icon=media-tape "Playing now: " "$* ☕️🎶" &
 }
 
-menu(){
-	printf "1. Lofi Girl\n"
-	printf "2. Chillhop\n"
-	printf "3. Box Lofi\n"
-	printf "4. The Bootleg Boy\n"
-	printf "5. Radio Spinner\n"
-	printf "6. SmoothChill"
+playstream(){
+	# the sh wrapper is necessary to be able to pass paths/args with spaces
+	# exec is necessary to get rid of the sh wrapper - not so sure about this
+	# the title arg is necessary to kill only this instance of mpv
+	sh -c "exec mpv --title=radio-mpv --no-video $ARGS $*"
 }
+
+declare -A streams
+
+# You can actually put anything mpv can run like multiple urls,
+# playlists, or folders with songs/videos. And also mpv args!
+
+streams["1. Lofi Girl"]="https://play.streamafrica.net/lofiradio"
+streams["2. Chillhop"]="https://stream.zeno.fm/fyn8eh3h5f8uv"
+streams["3. Box Lofi"]="https://stream.zeno.fm/f3wvbbqmdg8uv"
+streams["4. The Bootleg Boy"]="https://stream.zeno.fm/0r0xa792kwzuv"
+streams["5. Radio Spinner"]="https://live.radiospinner.com/lofi-hip-hop-64"
+streams["6. SmoothChill"]="https://media-ssl.musicradio.com/SmoothChill"
+# streams["   My Musics"]="${XDG_MUSIC_DIR:-$HOME/Music}" # Musics folder
+
 
 main() {
-	choice=$(menu | rofi -dmenu | cut -d. -f1)
+	choice=$(printf "%s\n" "${!streams[@]}" | sort -g | rofi -dmenu)
+	[[ -n "$choice" && -n "${streams[$choice]}" ]] || return 0
 
-	case $choice in
-		1)
-			notification "Lofi Girl ☕️🎶";
-            URL="https://play.streamafrica.net/lofiradio"
-			break
-			;;
-		2)
-			notification "Chillhop ☕️🎶";
-            URL="http://stream.zeno.fm/fyn8eh3h5f8uv"
-			break
-			;;
-		3)
-			notification "Box Lofi ☕️🎶";
-            URL="http://stream.zeno.fm/f3wvbbqmdg8uv"
-			break
-			;;
-		4)
-			notification "The Bootleg Boy ☕️🎶";
-            URL="http://stream.zeno.fm/0r0xa792kwzuv"
-			break
-			;;
-		5)
-			notification "Radio Spinner ☕️🎶";
-            URL="https://live.radiospinner.com/lofi-hip-hop-64"
-			break
-			;;
-		6)
-			notification "SmoothChill ☕️🎶";
-            URL="https://media-ssl.musicradio.com/SmoothChill"
-			break
-			;;
-	esac
-    # run mpv with args and selected url
-    # added title arg to make sure the pkill command kills only this instance of mpv
-    mpv $ARGS --title="radio-mpv" $URL
+	notification "$(echo "$choice" | cut -d' ' -f2-)" # Remove first column
+	playstream "${streams[$choice]}"
 }
 
-pkill -f radio-mpv || main
+pkill -f '^mpv --title=radio-mpv' || main

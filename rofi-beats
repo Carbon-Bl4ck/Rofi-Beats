@@ -1,53 +1,40 @@
-#!/bin/sh
+#!/bin/bash
+
+# add more args here according to preference
+ARGS="--volume=60"
 
 notification(){
-	terminal-notifier -message 'Now Playing: Lofi Radio ☕️🎶'
+	# '&' protects script from a dead notification server, probably useless on OSX
+	terminal-notifier -message "Now Playing: $* ☕️🎶" &
 }
 
-menu(){
-	printf "1. Lofi Girl\n"
-	printf "2. Chillhop\n"
-	printf "3. Box Lofi\n"
-	printf "4. The Bootleg Boy\n"
-	printf "5. Radio Spinner\n"
-	printf "6. SmoothChill"
+playstream(){
+	# the sh wrapper is necessary to be able to pass paths/args with spaces
+	# exec is necessary to get rid of the sh wrapper - not so sure about this
+	# the title arg is necessary to kill only this instance of mpv
+	sh -c "exec mpv --title=radio-mpv --no-video $ARGS $*"
 }
+
+declare -A streams
+
+# You can actually put anything mpv can run like multiple urls,
+# playlists, or folders with songs/videos. And also mpv args!
+
+streams["1. Lofi Girl"]="https://play.streamafrica.net/lofiradio"
+streams["2. Chillhop"]="https://stream.zeno.fm/fyn8eh3h5f8uv"
+streams["3. Box Lofi"]="https://stream.zeno.fm/f3wvbbqmdg8uv"
+streams["4. The Bootleg Boy"]="https://stream.zeno.fm/0r0xa792kwzuv"
+streams["5. Radio Spinner"]="https://live.radiospinner.com/lofi-hip-hop-64"
+streams["6. SmoothChill"]="https://media-ssl.musicradio.com/SmoothChill"
+# streams["   My Musics"]="$HOME/Music" # Musics folder
+
 
 main() {
-	choice=$(menu | choose -b ff79c6 -w 48 -n 7 | cut -d. -f1)
+	choice=$(printf "%s\n" "${!streams[@]}" | sort -g | choose -b ff79c6 -w 48 -n 7)
+	[[ -n "$choice" && -n "${streams[$choice]}" ]] || return 0
 
-	case $choice in
-		1)
-			notification ;
-				mpv "https://play.streamafrica.net/lofiradio"
-			break
-			;;
-		2)
-			notification ;
-				mpv "http://stream.zeno.fm/fyn8eh3h5f8uv"
-			break
-			;;
-		3)
-			notification ;
-				mpv "http://stream.zeno.fm/f3wvbbqmdg8uv"
-			break
-			;;
-		4)
-			notification ;
-				mpv "http://stream.zeno.fm/0r0xa792kwzuv"
-			break
-			;;
-		5)
-			notification ;
-				mpv "https://live.radiospinner.com/lofi-hip-hop-64"
-			break
-			;;
-		6)
-			notification ;
-				mpv "https://media-ssl.musicradio.com/SmoothChill"
-			break
-			;;
-	esac
+	notification "$(echo "$choice" | cut -d' ' -f2-)" # Remove first column
+	playstream "${streams[$choice]}"
 }
 
-pkill -f http || main
+pkill -f '^mpv --title=radio-mpv' || main
