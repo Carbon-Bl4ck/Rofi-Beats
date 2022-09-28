@@ -4,13 +4,13 @@
 ARGS="--volume=60"
 
 notification(){
-# change the icon to whatever you want. Make sure your notification server 
-# supports it and already configured.
+	# change the icon to whatever you want. Make sure your notification server 
+	# supports it and already configured.
 
 # Now it will receive argument so the user can rename the radio title
 # to whatever they want
-
-	notify-send "Playing now: " "$@" --icon=media-tape
+MUSIC_PATH="yourpath/PlaylistFiles"
+notify-send "Playing now: " "$@" --icon=media-tape
 }
 
 menu(){
@@ -19,7 +19,106 @@ menu(){
 	printf "3. Box Lofi\n"
 	printf "4. The Bootleg Boy\n"
 	printf "5. Radio Spinner\n"
-	printf "6. SmoothChill"
+	printf "6. SmoothChill\n"
+	printf "7. Black Metal\n"
+	printf "8. 60s\n"
+	printf "9. 70s\n"
+	printf "10. 80s\n"
+	printf "11. 90s\n"
+	printf "12. Acid_jazz\n"
+	printf "13. African\n"
+	printf "14. Alternative\n"
+	printf "15. Ambient\n"
+	printf "16. Americana\n"
+	printf "17. Anime\n"
+	printf "18. Arabic\n"
+	printf "19. Asian\n"
+	printf "20. Big_band\n"
+	printf "21. Blackmetal\n"
+	printf "22. Bluegrass\n"
+	printf "23. Blues\n"
+	printf "24. Breakbeat\n"
+	printf "25. Chillout\n"
+	printf "26. Christian\n"
+	printf "27. Classical\n"
+	printf "28. Club\n"
+	printf "29. College\n"
+	printf "30. Comedy\n"
+	printf "31. Country\n"
+	printf "32. Dance\n"
+	printf "33. Deutsch\n"
+	printf "34. Discofox\n"
+	printf "35. Disco\n"
+	printf "36. Downtempo\n"
+	printf "37. Drum_and_bass\n"
+	printf "38. Easy_listening\n"
+	printf "39. Ebm\n"
+	printf "40. Electronic\n"
+	printf "41. Eurodance\n"
+	printf "42. Film\n"
+	printf "43. Folk\n"
+	printf "44. France\n"
+	printf "45. Funk\n"
+	printf "46. Goa\n"
+	printf "47. Gospel\n"
+	printf "48. Gothic\n"
+	printf "49. Greek\n"
+	printf "50. Hardcore\n"
+	printf "51. Hardrock\n"
+	printf "52. Hip_hop\n"
+	printf "53. House\n"
+	printf "54. Index\n"
+	printf "55. India\n"
+	printf "56. Indie\n"
+	printf "57. Industrial\n"
+	printf "58. Instrumental\n"
+	printf "59. Italian\n"
+	printf "60. Jazz\n"
+	printf "61. Jpop\n"
+	printf "62. Jungle\n"
+	printf "63. Latin\n"
+	printf "64. Lounge\n"
+	printf "65. Metal\n"
+	printf "66. Mixed\n"
+	printf "67. Musical\n"
+	printf "68. Oldies\n"
+	printf "69. Opera\n"
+	printf "70. Polish\n"
+	printf "71. Polka\n"
+	printf "72. Pop\n"
+	printf "73. Portugal\n"
+	printf "74. Progressive\n"
+	printf "75. Punk\n"
+	printf "76. Quran\n"
+	printf "77. Rap\n"
+	printf "78. README\n"
+	printf "79. Reggae\n"
+	printf "80. Retro\n"
+	printf "81. Rnb\n"
+	printf "82. Rock\n"
+	printf "83. Romanian\n"
+	printf "84. Russian\n"
+	printf "85. Salsa\n"
+	printf "86. Schlager\n"
+	printf "87. Ska\n"
+	printf "88. Smooth_jazz\n"
+	printf "89. Soul\n"
+	printf "90. Soundtrack\n"
+	printf "91. Spain\n"
+	printf "92. Spiritual\n"
+	printf "93. Sport\n"
+	printf "94. Swing\n"
+	printf "95. Symphonic\n"
+	printf "96. Talk\n"
+	printf "97. Techno\n"
+	printf "98. Top_40\n"
+	printf "99. Trance\n"
+	printf "100. Turk\n"
+	printf "101. Urban\n"
+	printf "102. Usa\n"
+	printf "103. Various\n"
+	printf "104. Wave\n"
+	printf "105. World"
 }
 
 main() {
@@ -55,6 +154,501 @@ main() {
 			notification "SmoothChill ☕️🎶";
             URL="https://media-ssl.musicradio.com/SmoothChill"
 			break
+			;;
+		7)
+			notification "Black Metal ☕️🎶";
+            URL="$MUSIC_PATH/blackmetal.m3u"
+			break
+			;;
+		8)
+			notification "60s ☕️🎶";
+            URL="$MUSIC_PATH/60s.m3u"
+			break
+			;;
+		9)
+			notification "70s ☕️🎶";
+            URL="$MUSIC_PATH/70s.m3u"
+			break
+			;;
+		10)
+			notification "80s ☕️🎶";
+            URL="$MUSIC_PATH/80s.m3u"
+			break
+			;;
+		11)
+			notification "90s ☕️🎶";
+            URL="$MUSIC_PATH/90s.m3u"
+			break
+			;;
+		12)
+			notification "acid_jazz ☕️🎶";
+            URL="$MUSIC_PATH/acid_jazz.m3u"
+			break
+			;;
+		13)
+			notification "african ☕️🎶";
+            URL="$MUSIC_PATH/african.m3u"
+			break
+			;;
+		14)
+			notification "alternative ☕️🎶";
+            URL="$MUSIC_PATH/alternative.m3u"
+			break
+			;;
+		15)
+			notification "ambient ☕️🎶";
+            URL="$MUSIC_PATH/ambient.m3u"
+			break
+			;;
+		16)
+			notification "americana ☕️🎶";
+            URL="$MUSIC_PATH/.mamericana3u"
+			break
+			;;
+		17)
+			notification "anime ☕️🎶";
+            URL="$MUSIC_PATH/anime.m3u"
+			break
+			;;
+		18)
+			notification "arabic ☕️🎶";
+            URL="$MUSIC_PATH/arabic.m3u"
+			break
+			;;
+		19)
+			notification "asian ☕️🎶";
+            URL="$MUSIC_PATH/asian.m3u"
+			break
+			;;
+		20)
+			notification "big_band ☕️🎶";
+            URL="$MUSIC_PATH/big_band.m3u"
+			break
+			;;
+		21)
+			notification "blackmetal ☕️🎶";
+            URL="$MUSIC_PATH/blackmetal.m3u"
+			break
+			;;
+		22)
+			notification "bluegrass ☕️🎶";
+            URL="$MUSIC_PATH/bluegrass.m3u"
+			break
+			;;
+		23)
+			notification "blues ☕️🎶";
+            URL="$MUSIC_PATH/blues.m3u"
+			break
+			;;
+		24)
+			notification "breakbeat ☕️🎶";
+            URL="$MUSIC_PATH/breakbeat.m3u"
+			break
+			;;
+		25)
+			notification "chillout ☕️🎶";
+            URL="$MUSIC_PATH/chillout.m3u"
+			break
+			;;
+		26)
+			notification "christian ☕️🎶";
+            URL="$MUSIC_PATH/christian.m3u"
+			break
+			;;
+		27)
+			notification "classical ☕️🎶";
+            URL="$MUSIC_PATH/classical.m3u"
+			break
+			;;
+		28)
+			notification "club ☕️🎶";
+            URL="$MUSIC_PATH/club.m3u"
+			break
+			;;
+		29)
+			notification "college ☕️🎶";
+            URL="$MUSIC_PATH/college.m3u"
+			break
+			;;
+		30)
+			notification "comedy ☕️🎶";
+            URL="$MUSIC_PATH/comedy.m3u"
+			break
+			;;
+		31)
+			notification "country ☕️🎶";
+            URL="$MUSIC_PATH/country.m3u"
+			break
+			;;
+		32)
+			notification "dance ☕️🎶";
+            URL="$MUSIC_PATH/dance.m3u"
+			break
+			;;
+		33)
+			notification "deutsch ☕️🎶";
+            URL="$MUSIC_PATH/deutsch.m3u"
+			break
+			;;
+		34)
+			notification "discofox ☕️🎶";
+            URL="$MUSIC_PATH/discofox.m3u"
+			break
+			;;
+		35)
+			notification "disco ☕️🎶";
+            URL="$MUSIC_PATH/disco.m3u"
+			break
+			;;
+		36)
+			notification "downtempo ☕️🎶";
+            URL="$MUSIC_PATH/.mdowntempo3u"
+			break
+			;;
+		37)
+			notification "drum_and_bass ☕️🎶";
+            URL="$MUSIC_PATH/drum_and_bass.m3u"
+			break
+			;;
+		38)
+			notification "easy_listening ☕️🎶";
+            URL="$MUSIC_PATH/.m3u"
+			beasy_listeningreak
+			;;
+		39)
+			notification "ebm ☕️🎶";
+            URL="$MUSIC_PATHMebmusic/PlaylistFiles/ebm.m3u"
+			break
+			;;
+		40)
+			notification "electronic ☕️🎶";
+            URL="$MUSIC_PATH/electronic.m3u"
+			break
+			;;
+		41)
+			nelectronicotification " ☕️🎶";
+            URL="$MUSIC_PATH/.m3u"
+			break
+			;;
+		42)
+			notification "eurodance ☕️🎶";
+            URL="$MUSIC_PATH/.meurodance3u"
+			break
+			;;
+		43)
+			notification "film ☕️🎶";
+            URL="$MUSIC_PATH/film.m3u"
+			break
+			;;
+		44)
+			notification "folk ☕️🎶";
+            URL="$MUSIC_PATH/folk.m3u"
+			break
+			;;
+		45)
+			notification "france ☕️🎶";
+            URL="$MUSIC_PATH/france.m3u"
+			break
+			;;
+		46)
+			notification "funk ☕️🎶";
+            URL="$MUSIC_PATH/funk.m3u"
+			break
+			;;
+		47)
+			notification "goa ☕️🎶";
+            URL="$MUSIC_PATH/goa.m3u"
+			break
+			;;
+		48)
+			notification "gospel ☕️🎶";
+            URL="$MUSIC_PATH/gospel.m3u"
+			break
+			;;
+		49)
+			notification "gothic ☕️🎶";
+            URL="$MUSIC_PATH/gothic.m3u"
+			break
+			;;
+		50)
+			notification "greek ☕️🎶";
+            URL="$MUSIC_PATH/greek.m3u"
+			break
+			;;
+		51)
+			notification "hardcore ☕️🎶";
+            URL="$MUSIC_PATH/hardcore.m3u"
+			break
+			;;
+		52)
+			notification "hardrock ☕️🎶";
+            URL="$MUSIC_PATH/hardrock.m3u"
+			break
+			;;
+		53)
+			notification "hip_hop ☕️🎶";
+            URL="$MUSIC_PATH/hip_hop.m3u"
+			break
+			;;
+		54)
+			notification "house ☕️🎶";
+            URL="$MUSIC_PATH/house.m3u"
+			break
+			;;
+		55)
+			notification "index ☕️🎶";
+            URL="$MUSIC_PATH/index.m3u"
+			break
+			;;
+		56)
+			notification "india ☕️🎶";
+            URL="$MUSIC_PATH/india.m3u"
+			break
+			;;
+		57)
+			notification "indie ☕️🎶";
+            URL="$MUSIC_PATH/indie.m3u"
+			break
+			;;
+		58)
+			notification "industrial ☕️🎶";
+            URL="$MUSIC_PATH/.mindustrial3u"
+			break
+			;;
+		59)
+			notification "instrumental ☕️🎶";
+            URL="$MUSIC_PATH/instrumental.m3u"
+			break
+			;;
+		60)
+			notification "italian ☕️🎶";
+            URL="$MUSIC_PATH/italian.m3u"
+			break
+			;;
+		61)
+			notification "jazz ☕️🎶";
+            URL="$MUSIC_PATH/jazz.m3u"
+			break
+			;;
+		62)
+			notification "jpop ☕️🎶";
+            URL="$MUSIC_PATH/jpop.m3u"
+			break
+			;;
+		63)
+			notification "jungle ☕️🎶";
+            URL="$MUSIC_PATH/jungle.m3u"
+			break
+			;;
+		64)
+			notification "latin ☕️🎶";
+            URL="$MUSIC_PATH/latin.m3u"
+			break
+			;;
+		65)
+			notification "lounge ☕️🎶";
+            URL="$MUSIC_PATH/lounge.m3u"
+			break
+			;;
+		66)
+			notification "metal ☕️🎶";
+            URL="$MUSIC_PATH/metal.m3u"
+			break
+			;;
+		67)
+			notification "mixed ☕️🎶";
+            URL="$MUSIC_PATH/mixed.m3u"
+			break
+			;;
+		68)
+			notification "musical ☕️🎶";
+            URL="$MUSIC_PATH/musical.m3u"
+			break
+			;;
+		69)
+			notification "oldies ☕️🎶";
+            URL="$MUSIC_PATH/oldies.m3u"
+			break
+			;;
+		70)
+			notification "opera ☕️🎶";
+            URL="$MUSIC_PATH/opera.m3u"
+			break
+			;;
+		71)
+			notification "polish ☕️🎶";
+            URL="$MUSIC_PATH/polish.m3u"
+			break
+			;;
+		72)
+			notification "polka ☕️🎶";
+            URL="$MUSIC_PATH/polka.m3u"
+			break
+			;;
+		73)
+			notification "pop ☕️🎶";
+            URL="$MUSIC_PATH/pop.m3u"
+			break
+			;;
+		74)
+			notification "portugal ☕️🎶";
+            URL="$MUSIC_PATH/portugal.m3u"
+			break
+			;;
+		75)
+			notification "progressive ☕️🎶";
+            URL="$MUSIC_PATH/progressive.m3u"
+			break
+			;;
+		76)
+			notification "punk ☕️🎶";
+            URL="$MUSIC_PATH/punk.m3u"
+			break
+			;;
+		77)
+			notification "quran ☕️🎶";
+            URL="$MUSIC_PATH/quran.m3u"
+			break
+			;;
+		78)
+			notification "rap ☕️🎶";
+            URL="$MUSIC_PATH/rap.m3u"
+			break
+			;;
+		79)
+			notification "README ☕️🎶";
+            URL="$MUSIC_PATH/README.m3u"
+			break
+			;;
+		80)
+			notification "reggae ☕️🎶";
+            URL="$MUSIC_PATH/reggae.m3u"
+			break
+			;;
+		81)
+			notification "retro ☕️🎶";
+            URL="$MUSIC_PATH/retro.m3u"
+			break
+			;;
+		82)
+			notification "rnb ☕️🎶";
+            URL="$MUSIC_PATH/rnb.m3u"
+			break
+			;;
+		83)
+			notification "rock ☕️🎶";
+            URL="$MUSIC_PATH/rock.m3u"
+			break
+			;;
+		84)
+			notification "romanian ☕️🎶";
+            URL="$MUSIC_PATH/romanian.m3u"
+			break
+			;;
+		85)
+			notification "russian ☕️🎶";
+            URL="$MUSIC_PATH/russian.m3u"
+			break
+			;;
+		86)
+			notification "salsa ☕️🎶";
+            URL="$MUSIC_PATH/salsa.m3u"
+			break
+			;;
+		87)
+			notification "schlager ☕️🎶";
+            URL="$MUSIC_PATH/schlager.m3u"
+			break
+			;;
+		88)
+			notification "ska ☕️🎶";
+            URL="$MUSIC_PATH/ska.m3u"
+			break
+			;;
+		89)
+			notification "smooth_jazz ☕️🎶";
+            URL="$MUSIC_PATH/smooth_jazz.m3u"
+			break
+			;;
+		90)
+			notification "soul ☕️🎶";
+            URL="$MUSIC_PATH/soul.m3u"
+			break
+			;;
+		91)
+			notification "soundtrack ☕️🎶";
+            URL="$MUSIC_PATH/soundtrack.m3u"
+			break
+			;;
+		92)
+			notification "spain ☕️🎶";
+            URL="$MUSIC_PATH/spain.m3u"
+			break
+			;;
+		93)
+			notification "spiritual ☕️🎶";
+            URL="$MUSIC_PATH/spiritual.m3u"
+			break
+			;;
+		94)
+			notification "sport ☕️🎶";
+            URL="$MUSIC_PATH/sport.m3u"
+			break
+			;;
+		95)
+			notification "swing ☕️🎶";
+            URL="$MUSIC_PATH/swing.m3u"
+			break
+			;;
+		96)
+			notification "symphonic ☕️🎶";
+            URL="$MUSIC_PATH/symphonic.m3u"
+			break
+			;;
+		97)
+			notification "talk ☕️🎶";
+            URL="$MUSIC_PATH/talk.m3u"
+			break
+			;;
+		98)
+			notification "techno ☕️🎶";
+            URL="$MUSIC_PATH/techno.m3u"
+			break
+			;;
+		99)
+			notification "top_40 ☕️🎶";
+            URL="$MUSIC_PATH/top_40.m3u"
+			break
+			;;
+		100)
+			notification "trance ☕️🎶";
+            URL="$MUSIC_PATH/trance.m3u"
+			break
+			;;
+		101)
+			notification "turk ☕️🎶";
+            URL="$MUSIC_PATH/turk.m3u"
+			break
+			;;
+		102)
+			notification "urban ☕️🎶";
+            URL="$MUSIC_PATH/urban.m3u"
+			break
+			;;
+		103)
+			notification "usa ☕️🎶";
+            URL="$MUSIC_PATH/usa.m3u"
+			break
+			;;
+		104)
+			notification "various ☕️🎶";
+            URL="$MUSIC_PATH/various.m3u"
+			break
+			;;
+		105)
+			notification "wave ☕️🎶";
+            URL="$MUSIC_PATH/wave.m3u"
+			ureak
 			;;
 	esac
     # run mpv with args and selected url
