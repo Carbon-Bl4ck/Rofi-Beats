@@ -5,452 +5,389 @@ Created on Thu Sep 29 14:54:58 2022
 
 @author: GoodGuyPat
 
-Created based on rofi-beats by Carbon-Bl4ck (https://github.com/Carbon-Bl4ck/Rofi-Beats/blob/main/rofi-beats-linux)
+Created based on rofi-beats by Carbon-Bl4ck (https://github.com/Carbon-Bl4ck/Rofi-Beats/blob/main/rofi-beats-linux).
+Added piping of mpv's ouptput to allow it to be captured by other programs. The last line will contain the title of
+the currently played song, if any, with the prefix 'icy-title'. This can be useful to display the currently
+played song in a status bar, for example (tested with Waybar). It is also automatically connected to a socket
+so that it can be contolled externally (for example, by sending a play/pause command via 
+`echo '{ "command": ["cycle", "pause"] }' | socat - /tmp/mpvsocket`
+)
 """
+# Import modules. There are all built-in in Python3
 
-60s.m3u
-70s.m3u
-80s.m3u
-90s.m3u
-acid_jazz.m3u
-african.m3u
-alternative.m3u
-ambient.m3u
-americana.m3u
-anime.m3u
-arabic.m3u
-asian.m3u
-big_band.m3u
-blackmetal.m3u
-bluegrass.m3u
-blues.m3u
-breakbeat.m3u
-chillout.m3u
-christian.m3u
-classical.m3u
-club.m3u
-college.m3u
-comedy.m3u
-country.m3u
-dance.m3u
-deutsch.m3u
-discofox.m3u
-disco.m3u
-downtempo.m3u
-drum_and_bass.m3u
-easy_listening.m3u
-ebm.m3u
-electronic.m3u
-eurodance.m3u
-film.m3u
-folk.m3u
-france.m3u
-funk.m3u
-goa.m3u
-gospel.m3u
-gothic.m3u
-greek.m3u
-hardcore.m3u
-hardrock.m3u
-hip_hop.m3u
-house.m3u
-india.m3u
-indie.m3u
-industrial.m3u
-instrumental.m3u
-italian.m3u
-jazz.m3u
-jpop.m3u
-jungle.m3u
-latin.m3u
-lounge.m3u
-metal.m3u
-mixed.m3u
-musical.m3u
-oldies.m3u
-opera.m3u
-polish.m3u
-polka.m3u
-pop.m3u
-portugal.m3u
-progressive.m3u
-punk.m3u
-quran.m3u
-rap.m3u
-reggae.m3u
-retro.m3u
-rnb.m3u
-rock.m3u
-romanian.m3u
-russian.m3u
-salsa.m3u
-schlager.m3u
-ska.m3u
-smooth_jazz.m3u
-soul.m3u
-soundtrack.m3u
-spain.m3u
-spiritual.m3u
-sport.m3u
-swing.m3u
-symphonic.m3u
-talk.m3u
-techno.m3u
-top_40.m3u
-trance.m3u
-turk.m3u
-urban.m3u
-usa.m3u
-various.m3u
-wave.m3u
-w
-
-import os
 import subprocess as s
+from pathlib import Path
+import sys
+
+# List all our radio stations
 
 radios = {
-"1. Lofi Girl":{
+"Lofi Girl":{
 "notification": "Lofi Girl ☕️🎶",
 "URL":"https://play.streamafrica.net/lofiradio"},
-"2. Chillhop":{
+"Chillhop":{
 "notification": "Chillhop ☕️🎶",
 "URL":"http://stream.zeno.fm/fyn8eh3h5f8uv"},
-"3. Box Lofi":{
+"Box Lofi":{
 "notification": "Box Lofi ☕️🎶",
 "URL":"http://stream.zeno.fm/f3wvbbqmdg8uv"},
-"4. The Bootleg Boy":{
+"The Bootleg Boy":{
 "notification": "The Bootleg Boy ☕️🎶",
 "URL":"http://stream.zeno.fm/0r0xa792kwzuv"},
-"5. Radio Spinner":{
+"Radio Spinner":{
 "notification": "Radio Spinner ☕️🎶",
 "URL":"https://live.radiospinner.com/lofi-hip-hop-64"},
-"6. SmoothChill":{
+"SmoothChill":{
 "notification": "SmoothChill ☕️🎶",
 "URL":"https://media-ssl.musicradio.com/SmoothChill"},
-"7. Smooth Jazz":{
-"notification": "Smooth Jazz ☕️🎶",
-"URL":"$MUSIC_PATHsmoothjazz.mp3"},
-"8. Black Metal":{
+"Black Metal":{
 "notification": "Black Metal ☕️🎶",
-"URL":"$MUSIC_PATH/blackmetal.m3u"},
-"9. 60s":{
+"URL":"http://trueblackmetalradio.com:666/radio"},
+"60s":{
 "notification": "60s ☕️🎶",
-"URL":"$MUSIC_PATH/60s.m3u"},
-"10. 70s":{
+"URL":"http://64.40.99.76:8000/stream/1/"},
+"70s":{
 "notification": "70s ☕️🎶",
-"URL":"$MUSIC_PATH/70s.m3u"},
-"11. 80s":{
+"URL":"http://hydra.cdnstream.com/1823_128"},
+"80s":{
 "notification": "80s ☕️🎶",
-"URL":"$MUSIC_PATH/80s.m3u"},
-"12. 90s":{
+"URL":"https://orf-live.ors-shoutcast.at/oe3-q2a"},
+"90s":{
 "notification": "90s ☕️🎶",
-"URL":"$MUSIC_PATH/90s.m3u"},
-"13. Acid_jazz":{
+"URL":"https://orf-live.ors-shoutcast.at/oe3-q2a"},
+"Acid_jazz":{
 "notification": "acid_jazz ☕️🎶",
-"URL":"$MUSIC_PATH/acid_jazz.m3u"},
-"14. African":{
+"URL":"http://138.201.83.14:8010/stream/1/"},
+"African":{
 "notification": "african ☕️🎶",
-"URL":"$MUSIC_PATH/african.m3u"},
-"15. Alternative":{
+"URL":"http://192.95.18.39:5127/stream/1/"},
+"Alternative":{
 "notification": "alternative ☕️🎶",
-"URL":"$MUSIC_PATH/alternative.m3u"},
-"16. Ambient":{
+"URL":"http://107.155.111.170:8440"},
+"Ambient":{
 "notification": "ambient ☕️🎶",
-"URL":"$MUSIC_PATH/ambient.m3u"},
-"17. Americana":{
+"URL":"http://starfrosch.ch:8000/stream"},
+"Americana":{
 "notification": "americana ☕️🎶",
-"URL":"$MUSIC_PATH/.mamericana3u"},
-"18. Anime":{
+"URL":"http://51.222.8.101:8000/stream/1/"},
+"Anime":{
 "notification": "anime ☕️🎶",
-"URL":"$MUSIC_PATH/anime.m3u"},
-"19. Arabic":{
+"URL":"http://hi5.streamingsoundtracks.com:80"},
+"Arabic":{
 "notification": "arabic ☕️🎶",
-"URL":"$MUSIC_PATH/arabic.m3u"},
-"20. Asian":{
+"URL":"http://radioshamfm.grtvstream.com:8400/stream/1/"},
+"Asian":{
 "notification": "asian ☕️🎶",
-"URL":"$MUSIC_PATH/asian.m3u"},
-"21. Big_band":{
+"URL":"http://desi.canstream.co.uk:8001/live.mp3"},
+"Big_band":{
 "notification": "big_band ☕️🎶",
-"URL":"$MUSIC_PATH/big_band.m3u"},
-"22. Blackmetal":{
-"notification": "blackmetal ☕️🎶",
-"URL":"$MUSIC_PATH/blackmetal.m3u"},
-"23. Bluegrass":{
+"URL":"http://199.189.111.28:8012"},
+"Bluegrass":{
 "notification": "bluegrass ☕️🎶",
-"URL":"$MUSIC_PATH/bluegrass.m3u"},
-"24. Blues":{
+"URL":"http://streams.abidingradio.org:7840/1_autodj"},
+"Blues":{
 "notification": "blues ☕️🎶",
-"URL":"$MUSIC_PATH/blues.m3u"},
-"25. Breakbeat":{
+"URL":"http://87.118.126.101:19406/stream/1/"},
+"Breakbeat":{
 "notification": "breakbeat ☕️🎶",
-"URL":"$MUSIC_PATH/breakbeat.m3u"},
-"26. Chillout":{
+"URL":"http://www.drums.ro:8000"},
+"Chillout":{
 "notification": "chillout ☕️🎶",
-"URL":"$MUSIC_PATH/chillout.m3u"},
-"27. Christian":{
+"URL":"http://hirschmilch.de:7000/stream/4/"},
+"Christian":{
 "notification": "christian ☕️🎶",
-"URL":"$MUSIC_PATH/christian.m3u"},
-"28. Classical":{
+"URL":"http://ic2.christiannetcast.com/kxta-fm"},
+"Classical":{
 "notification": "classical ☕️🎶",
-"URL":"$MUSIC_PATH/classical.m3u"},
-"29. Club":{
+"URL":"http://uk2.streamingpulse.com:8010/stream/1/"},
+"Club":{
 "notification": "club ☕️🎶",
-"URL":"$MUSIC_PATH/club.m3u"},
-"30. College":{
+"URL":"http://stream2.dancewave.online:8080/dance.mp3"},
+"College":{
 "notification": "college ☕️🎶",
-"URL":"$MUSIC_PATH/college.m3u"},
-"31. Comedy":{
+"URL":"http://ice1.somafm.com/indiepop-128-mp3"},
+"Comedy":{
 "notification": "comedy ☕️🎶",
-"URL":"$MUSIC_PATH/comedy.m3u"},
-"32. Country":{
+"URL":"http://live.topfm.hu:8000/comedy.mp3"},
+"Country":{
 "notification": "country ☕️🎶",
-"URL":"$MUSIC_PATH/country.m3u"},
-"33. Dance":{
+"URL":"http://87.118.126.101:19406/stream/1/"},
+"Dance":{
 "notification": "dance ☕️🎶",
-"URL":"$MUSIC_PATH/dance.m3u"},
-"34. Deutsch":{
+"URL":"http://online.kissfm.ua/KissFM"},
+"Deutsch":{
 "notification": "deutsch ☕️🎶",
-"URL":"$MUSIC_PATH/deutsch.m3u"},
-"35. Discofox":{
+"URL":"http://pool.radiopaloma.de/RADIOPALOMA.mp3"},
+"Discofox":{
 "notification": "discofox ☕️🎶",
-"URL":"$MUSIC_PATH/discofox.m3u"},
-"36. Disco":{
+"URL":"https://s37.derstream.net/afr128.mp3"},
+"Disco":{
 "notification": "disco ☕️🎶",
-"URL":"$MUSIC_PATH/disco.m3u"},
-"37. Downtempo":{
-"notification": "downtempo ☕️🎶",
-"URL":"$MUSIC_PATH/.mdowntempo3u"},
-"38. Drum_and_bass":{
+"URL":"http://kunc.streamguys1.com/kjac"},
+"Drum_and_bass":{
 "notification": "drum_and_bass ☕️🎶",
-"URL":"$MUSIC_PATH/drum_and_bass.m3u"},
-"39. Easy_listening":{
+"URL":"http://193.0.98.66:8005/stream/1/"},
+"Easy_listening":{
 "notification": "easy_listening ☕️🎶",
-"URL":"$MUSIC_PATH/easy_listening.m3u"},
-"40. Ebm":{
+"URL":"http://stream.soundstorm-radio.com:8000/stream/1/"},
+"Ebm":{
 "notification": "ebm ☕️🎶",
-"URL":"$MUSIC_PATHMebmusic/PlaylistFiles/ebm.m3u"},
-"41. Electronic":{
+"URL":"http://www.ebm-radio.org:7000/stream/1/"},
+"Electronic":{
 "notification": "electronic ☕️🎶",
-"URL":"$MUSIC_PATH/electronic.m3u"},
-"42. Eurodance":{
+"URL":"http://stream2.dancewave.online:8080/dance.mp3"},
+"Eurodance":{
 "notification": "eurodance ☕️🎶",
-"URL":"$MUSIC_PATH/eurodance.m3u"},
-"43. Film":{
+"URL":"http://89.39.189.52:8000/stream/1/"},
+"Film":{
 "notification": "film ☕️🎶",
-"URL":"$MUSIC_PATH/film.m3u"},
-"44. Folk":{
+"URL":"http://94.23.51.96:8001"},
+"Folk":{
 "notification": "folk ☕️🎶",
-"URL":"$MUSIC_PATH/folk.m3u"},
-"45. France":{
+"URL":"http://live.narodni.hr:8059/stream/1/"},
+"France":{
 "notification": "france ☕️🎶",
-"URL":"$MUSIC_PATH/france.m3u"},
-"46. Funk":{
+"URL":"http://stream.lazaradio.com:8100/live.mp3"},
+"Funk":{
 "notification": "funk ☕️🎶",
-"URL":"$MUSIC_PATH/funk.m3u"},
-"47. Goa":{
+"URL":"http://91.121.104.123:8000/stream/1/"},
+"Goa":{
 "notification": "goa ☕️🎶",
-"URL":"$MUSIC_PATH/goa.m3u"},
-"48. Gospel":{
+"URL":"http://cast.magicstreams.gr:9111/stream/1/"},
+"Gospel":{
 "notification": "gospel ☕️🎶",
-"URL":"$MUSIC_PATH/gospel.m3u"},
-"49. Gothic":{
+"URL":"http://ic2.christiannetcast.com/kxta-fm"},
+"Gothic":{
 "notification": "gothic ☕️🎶",
-"URL":"$MUSIC_PATH/gothic.m3u"},
-"50. Greek":{
+"URL":"http://162.213.197.52:80"},
+"Greek":{
 "notification": "greek ☕️🎶",
-"URL":"$MUSIC_PATH/greek.m3u"},
-"51. Hardcore":{
+"URL":"http://sokfm.lalala.gr:8000/stream/1/"},
+"Hardcore":{
 "notification": "hardcore ☕️🎶",
-"URL":"$MUSIC_PATH/hardcore.m3u"},
-"52. Hardrock":{
+"URL":"http://173.245.78.93:80"},
+"Hardrock":{
 "notification": "hardrock ☕️🎶",
-"URL":"$MUSIC_PATH/hardrock.m3u"},
-"53. Hip_hop":{
+"URL":"http://144.217.29.205:80/stream/1/"},
+"Hip_hop":{
 "notification": "hip_hop ☕️🎶",
-"URL":"$MUSIC_PATH/hip_hop.m3u"},
-"54. House":{
+"URL":"http://starfrosch.ch:8000/stream"},
+"House":{
 "notification": "house ☕️🎶",
-"URL":"$MUSIC_PATH/house.m3u"},
-"55. Index":{
-"notification": "index ☕️🎶",
-"URL":"$MUSIC_PATH/index.m3u"},
-"56. India":{
+"URL":"http://live.dancemusic.ro:7000/stream/1/"},
+"India":{
 "notification": "india ☕️🎶",
-"URL":"$MUSIC_PATH/india.m3u"},
-"57. Indie":{
+"URL":"http://cast2.asurahosting.com:8569/stream/1/"},
+"Indie":{
 "notification": "indie ☕️🎶",
-"URL":"$MUSIC_PATH/indie.m3u"},
-"58. Industrial":{
+"URL":"http://b.fmradiomanele.ro:8044/stream/1/"},
+"Industrial":{
 "notification": "industrial ☕️🎶",
-"URL":"$MUSIC_PATH/.mindustrial3u"},
-"59. Instrumental":{
+"URL":"http://mp3.stream.tb-group.fm:80/ct.mp3"},
+"Instrumental":{
 "notification": "instrumental ☕️🎶",
-"URL":"$MUSIC_PATH/instrumental.m3u"},
-"60. Italian":{
+"URL":"http://199.233.234.34:25373/stream/1/"},
+"Italian":{
 "notification": "italian ☕️🎶",
-"URL":"$MUSIC_PATH/italian.m3u"},
-"61. Jazz":{
+"URL":"http://uk2.streamingpulse.com:8010/stream/1/"},
+"Jazz":{
 "notification": "jazz ☕️🎶",
-"URL":"$MUSIC_PATH/jazz.m3u"},
-"62. Jpop":{
+"URL":"http://64.95.243.43:8002/stream/1/"},
+"Jpop":{
 "notification": "jpop ☕️🎶",
-"URL":"$MUSIC_PATH/jpop.m3u"},
-"63. Jungle":{
+"URL":"https://igor.torontocast.com:1025/stream/1/"},
+"Jungle":{
 "notification": "jungle ☕️🎶",
-"URL":"$MUSIC_PATH/jungle.m3u"},
-"64. Latin":{
+"URL":"http://andromeda.shoutca.st:8031/stream/1/"},
+"Latin":{
 "notification": "latin ☕️🎶",
-"URL":"$MUSIC_PATH/latin.m3u"},
-"65. Lounge":{
+"URL":"http://radiopetrecaretzu.zapto.org:8383/stream/1/"},
+"Lounge":{
 "notification": "lounge ☕️🎶",
-"URL":"$MUSIC_PATH/lounge.m3u"},
-"66. Metal":{
+"URL":"http://larry.torontocast.com:1820/stream/1/"},
+"Metal":{
 "notification": "metal ☕️🎶",
-"URL":"$MUSIC_PATH/metal.m3u"},
-"67. Mixed":{
+"URL":"http://173.245.78.93:80"},
+"Mixed":{
 "notification": "mixed ☕️🎶",
-"URL":"$MUSIC_PATH/mixed.m3u"},
-"68. Musical":{
+"URL":"http://centova16.ciclanohost.com.br:9627/stream/1/"},
+"Musical":{
 "notification": "musical ☕️🎶",
-"URL":"$MUSIC_PATH/musical.m3u"},
-"69. Oldies":{
+"URL":"http://67.212.179.138:7102/stream/1/"},
+"Oldies":{
 "notification": "oldies ☕️🎶",
-"URL":"$MUSIC_PATH/oldies.m3u"},
-"70. Opera":{
+"URL":"http://b.fmradiomanele.ro:8044/stream/1/"},
+"Opera":{
 "notification": "opera ☕️🎶",
-"URL":"$MUSIC_PATH/opera.m3u"},
-"71. Polish":{
+"URL":"http://stream.klassikradio.de/opera/mp3-128"},
+"Polish":{
 "notification": "polish ☕️🎶",
-"URL":"$MUSIC_PATH/polish.m3u"},
-"72. Polka":{
+"URL":"http://stream4.nadaje.com:15476/radiobialystok"},
+"Polka":{
 "notification": "polka ☕️🎶",
-"URL":"$MUSIC_PATH/polka.m3u"},
-"73. Pop":{
+"URL":"http://server-67.stream-server.nl:8910/autodj"},
+"Pop":{
 "notification": "pop ☕️🎶",
-"URL":"$MUSIC_PATH/pop.m3u"},
-"74. Portugal":{
+"URL":"http://stream.radioaktual.si/Aktual"},
+"Portugal":{
 "notification": "portugal ☕️🎶",
-"URL":"$MUSIC_PATH/portugal.m3u"},
-"75. Progressive":{
+"URL":"http://195.23.85.126:8401/stream/1/"},
+"Progressive":{
 "notification": "progressive ☕️🎶",
-"URL":"$MUSIC_PATH/progressive.m3u"},
-"76. Punk":{
+"URL":"http://cast.magicstreams.gr:9111/stream/1/"},
+"Punk":{
 "notification": "punk ☕️🎶",
-"URL":"$MUSIC_PATH/punk.m3u"},
-"77. Quran":{
+"URL":"http://stream.laut.fm/tax_free_radio"},
+"Quran":{
 "notification": "quran ☕️🎶",
-"URL":"$MUSIC_PATH/quran.m3u"},
-"78. Rap":{
+"URL":"http://162.244.81.30:8224"},
+"Rap":{
 "notification": "rap ☕️🎶",
-"URL":"$MUSIC_PATH/rap.m3u"},
-"79. README":{
-"notification": "README ☕️🎶",
-"URL":"$MUSIC_PATH/README.m3u"},
-"80. Reggae":{
+"URL":"http://185.23.192.118:8000/stream/1/"},
+"Reggae":{
 "notification": "reggae ☕️🎶",
-"URL":"$MUSIC_PATH/reggae.m3u"},
-"81. Retro":{
+"URL":"http://s02.whooshserver.net:9091/live.mp3"},
+"Retro":{
 "notification": "retro ☕️🎶",
-"URL":"$MUSIC_PATH/retro.m3u"},
-"82. Rnb":{
+"URL":"http://46.28.49.164:7504/autodj"},
+"Rnb":{
 "notification": "rnb ☕️🎶",
-"URL":"$MUSIC_PATH/rnb.m3u"},
-"83. Rock":{
+"URL":"http://radiopetrecaretzu.zapto.org:8383/stream/1/"},
+"Rock":{
 "notification": "rock ☕️🎶",
-"URL":"$MUSIC_PATH/rock.m3u"},
-"84. Romanian":{
+"URL":"http://b.fmradiomanele.ro:8044/stream/1/"},
+"Romanian":{
 "notification": "romanian ☕️🎶",
-"URL":"$MUSIC_PATH/romanian.m3u"},
-"85. Russian":{
+"URL":"http://live.guerrillaradio.ro:8010/guerrilla.aac"},
+"Russian":{
 "notification": "russian ☕️🎶",
-"URL":"$MUSIC_PATH/russian.m3u"},
-"86. Salsa":{
+"URL":"http://listen.rusongs.ru/ru-mp3-128"},
+"Salsa":{
 "notification": "salsa ☕️🎶",
-"URL":"$MUSIC_PATH/salsa.m3u"},
-"87. Schlager":{
+"URL":"http://51.222.8.101:8000/stream/1/"},
+"Schlager":{
 "notification": "schlager ☕️🎶",
-"URL":"$MUSIC_PATH/schlager.m3u"},
-"88. Ska":{
+"URL":"http://pool.radiopaloma.de/RADIOPALOMA.mp3"},
+"Ska":{
 "notification": "ska ☕️🎶",
-"URL":"$MUSIC_PATH/ska.m3u"},
-"89. Smooth_jazz":{
+"URL":"http://stream.m-1.fm/lietus/aacp64"},
+"Smooth_jazz":{
 "notification": "smooth_jazz ☕️🎶",
-"URL":"$MUSIC_PATH/smooth_jazz.m3u"},
-"90. Soul":{
+"URL":"http://64.95.243.43:8002/stream/1/"},
+"Soul":{
 "notification": "soul ☕️🎶",
-"URL":"$MUSIC_PATH/soul.m3u"},
-"91. Soundtrack":{
+"URL":"http://stream01.superfly.fm:8080/live"},
+"Soundtrack":{
 "notification": "soundtrack ☕️🎶",
-"URL":"$MUSIC_PATH/soundtrack.m3u"},
-"92. Spain":{
+"URL":"http://94.23.51.96:8001"},
+"Spain":{
 "notification": "spain ☕️🎶",
-"URL":"$MUSIC_PATH/spain.m3u"},
-"93. Spiritual":{
+"URL":"http://live.radiovoz.es/mp3/stream_coruna.mp3"},
+"Spiritual":{
 "notification": "spiritual ☕️🎶",
-"URL":"$MUSIC_PATH/spiritual.m3u"},
-"94. Sport":{
+"URL":"http://ic2.christiannetcast.com/kxta-fm"},
+"Sport":{
 "notification": "sport ☕️🎶",
-"URL":"$MUSIC_PATH/sport.m3u"},
-"95. Swing":{
+"URL":"http://144.140.228.109:8220/stream/1/"},
+"Swing":{
 "notification": "swing ☕️🎶",
-"URL":"$MUSIC_PATH/swing.m3u"},
-"96. Symphonic":{
+"URL":"http://s6.voscast.com:11312/stream/1/"},
+"Symphonic":{
 "notification": "symphonic ☕️🎶",
-"URL":"$MUSIC_PATH/symphonic.m3u"},
-"97. Talk":{
+"URL":"http://hi5.adagio.fm"},
+"Talk":{
 "notification": "talk ☕️🎶",
-"URL":"$MUSIC_PATH/talk.m3u"},
-"98. Techno":{
+"URL":"https://lb0-stream.radiox981.ca/choi.aac"},
+"Techno":{
 "notification": "techno ☕️🎶",
-"URL":"$MUSIC_PATH/techno.m3u"},
-"99. Top_40":{
+"URL":"http://51.89.148.171:8022/stream/1/"},
+"Top_40":{
 "notification": "top_40 ☕️🎶",
-"URL":"$MUSIC_PATH/top_40.m3u"},
-"100. Trance":{
+"URL":"http://listen.rusongs.ru/ru-mp3-128"},
+"Trance":{
 "notification": "trance ☕️🎶",
-"URL":"$MUSIC_PATH/trance.m3u"},
-"101. Turk":{
+"URL":"http://stream2.dancewave.online:8080/dance.mp3"},
+"Turk":{
 "notification": "turk ☕️🎶",
-"URL":"$MUSIC_PATH/turk.m3u"},
-"102. Urban":{
+"URL":"http://37.247.98.8/stream/22/"},
+"Urban":{
 "notification": "urban ☕️🎶",
-"URL":"$MUSIC_PATH/urban.m3u"},
-"103. Usa":{
+"URL":"http://51.222.8.101:8011/stream/1/"},
+"Usa":{
 "notification": "usa ☕️🎶",
-"URL":"$MUSIC_PATH/usa.m3u"},
-"104. Various":{
+"URL":"http://stream2.joyhits.online:8880/joyhits.aac"},
+"Various":{
 "notification": "various ☕️🎶",
-"URL":"$MUSIC_PATH/various.m3u"},
-"105. Wave":{
+"URL":"http://live.guerrillaradio.ro:8010/guerrilla.aac"},
+"Wave":{
 "notification": "wave ☕️🎶",
-"URL":"$MUSIC_PATH/wave.m3u"},
-"106. World":{
+"URL":"http://stream2.dancewave.online:8080/dance.mp3"},
+"World":{
 "notification": "world ☕️🎶",
-"URL":"$MUSIC_PATH/world.m3u"}
+"URL":"http://starfrosch.ch:8000/stream"}
 }
 
-choices = []
+# Declare where the output of the player will be written, and its name. 
+# By default it will be stored in the current user's home directory. 
+# This output is only relevant if it is captured by other programs. 
 
+output_file_dir = Path.home()
+output_file_name = 'rofi-beats_out.txt'
+
+
+# Dinamically add a numerical prefix to the radio stations based on the order
+# they appear in the dictionary above. This is done to respect Carbon-Bl4ck's
+# original format, and to allow users to edit the radio dictionary without
+# needing to maintain the numbers in the station names.
+
+choices = []
+index = 0
 for i in radios:
-    choices.append(i)
+    index = index+1
+    choices.append(f"{str(index)}. {i}")
+
+# Compile list to be passed to Rofi
 
 choicelist = "\n".join(choices)
-  
+
+# Pass list to Rofi and capture user input
+
 p1 = s.Popen(["echo", choicelist], stdout=s.PIPE)
 p2 = s.Popen(["rofi", "-dmenu", "-i"], stdin=p1.stdout, stdout=s.PIPE)
 p1.stdout.close()
 
 output = p2.communicate()[0].decode()[:-1]
 
-if output in radios:
-    url = radios[output]['URL']
+# Remove the number we just added
+
+cleanoutput = " ".join(output.split()[1:])
+
+# If there is an error, notify user and stop execution
+
+if cleanoutput in radios:
+    url = radios[cleanoutput]['URL']
+else:
+    s.run(["notify-send","Station not found"])
+    sys.exit()
+
+# Try to close any current instance of mpv
 
 try:
-    s.run(['pkill, mpv'])
+    s.run(['pkill','-f','radio-mpv'])
 except:
     pass
 
-s.run(["mpv",f"{url}"])
+# Clear existing output file if found. This is done so that the file does not
+# get huge after many executions
+print('1')
+s.run(['rm',f"{output_file_dir}/{output_file_name}"])
+print('2')
+# Open player with URL of selected station, send notification, write output to
+# file
 
-s.run(["notify-send","Playing now: \"{radios[output]['notification']}\"","--icon=media-tape"])
+with open(f"{output_file_dir}/{output_file_name}",'w') as f:
+    print('3')
+    s.run(["notify-send",f"Playing now: \"{radios[cleanoutput]['notification']}\"","--icon=media-tape"])
+    print('4')
+    s.run(["mpv",f"{url}","--idle=yes", "--volume=60", "--title=\"radio-mpv\"","--input-ipc-server=/tmp/mpvsocket"],stdout=f)
 
