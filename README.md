@@ -27,15 +27,22 @@ Once you have the dependencies installed, simply execute the file 'rofi-beats-li
 
 ```
 $ git clone https://github.com/GoodGuyPat/rofi-beats-linux
-$ cd Rofi-Beats
+$ cd rofi-beats-linux
 $ chmod +x rofi-beats-linux.py
 ```
 Now the script is ready to use!
+
 
 ```
 python3 rofi-beats-linux.py
 ```
 
+If you want your launchers to find it, you may want to move it to your bin directory
+
+
+```
+$ mv rofi-beats-linux.py ~/.local/bin/
+```
 ## Usage
 
 The script toggles the radio on and off depending on it's current state.
